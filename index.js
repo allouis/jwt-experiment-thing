@@ -73,7 +73,7 @@ JWTManager.prototype.verifyToken = function verifyToken (token, cb) {
       if (verified) return cb(null, true)
       return cb(new Error('invalid sig'))
     })
-  })
+  }).on('error', _ => cb(new Error('error connecting to issuer')))
 }
 
 function verify (parts, publicKey) {
